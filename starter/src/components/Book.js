@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as BooksAPI from "../utils/BooksAPI";
 
 const Book = ({ id, thumbnail, title, authors, shelf, onShelfChanged }) => {
-    const [ selectedShelf, setSelectedShelf ] = useState(shelf);
+    const [ selectedShelf, setSelectedShelf ] = useState(shelf ? shelf : "default");
 
     const handleShelfChanged = async (e) => {
         const newShelf = e.target.value;
@@ -29,7 +29,7 @@ const Book = ({ id, thumbnail, title, authors, shelf, onShelfChanged }) => {
                 ></div>
                 <div className="book-shelf-changer">
                     <select value={selectedShelf} onChange={handleShelfChanged}>
-                        <option disabled>{ selectedShelf ? "Move to..." : "Add to..." }</option>
+                        <option value="default" disabled>{ selectedShelf ? "Move to..." : "Add to..." }</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>

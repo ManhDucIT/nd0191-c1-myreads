@@ -17,8 +17,24 @@ function App() {
     getAllBooks();
   }, []);
 
-  const handleShelfChanged = (bookId, newShelf) => {
-    setBooks(books.map(book => book.id === bookId ? {...book, shelf: newShelf } : book ));
+  const handleShelfChanged = async (bookId, newShelf) => {
+    let isBookExisting = false;
+
+    const updatedBooks = books.map(book => {
+      if(book.id === bookId){
+        book.shelf = newShelf;
+        isBookExisting = true;
+      }
+
+      return book;
+    });
+
+    if(!isBookExisting){
+      const res = await BooksAPI.get(bookId);
+      updatedBooks = [...updatedBooks, res];
+    }
+    
+    setBooks(updatedBooks);
   };
 
   return (
@@ -32,7 +48,7 @@ function App() {
       <Route
         path="/search"
         element={
-          <SearchScreen onShelfChanged={handleShelfChanged} />
+          <SearchScreen books={books} onShelfChanged={handleShelfChanged} />
         }/>
     </Routes>
   );

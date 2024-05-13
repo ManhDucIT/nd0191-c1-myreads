@@ -4,15 +4,23 @@ import { Link } from "react-router-dom";
 import BooksGrid from "../components/BooksGrid";
 import * as BooksAPI from "../utils/BooksAPI";
 
-const SearchScreen = ({ onShelfChanged }) => {
+const SearchScreen = ({ books, onShelfChanged }) => {
     const [ query, setQuery ] = useState('');
-    const [ books, setBooks ] = useState([]);
+    const [ searchedBooks, setSearchedBooks ] = useState([]);
 
     useEffect(() => {
         const search = setTimeout(async () => {
             if(query){
                 const res = await BooksAPI.search(query, 100);
-                setBooks(res);
+                
+                res.forEach(searchedBook => {
+                    const book = books.find(book => book.id === searchedBook.id);
+                    if(book){
+                        searchedBook.shelf = book.shelf;
+                    }
+                });
+                
+                setSearchedBooks(res);
             }
         }, 200)
     
@@ -36,13 +44,14 @@ const SearchScreen = ({ onShelfChanged }) => {
                 </div>
             </div>
             <div className="search-books-results">
-                <BooksGrid books={books} onShelfChanged={onShelfChanged} />
+                <BooksGrid books={searchedBooks} onShelfChanged={onShelfChanged} />
             </div>
         </div>
     );
 };
 
 SearchScreen.propTypes = {
+    books: PropTypes.array.isRequired,
     onShelfChanged: PropTypes.func.isRequired
 }
 
