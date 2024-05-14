@@ -29,11 +29,11 @@ const Book = ({ id, thumbnail, title, authors, shelf, onShelfChanged }) => {
                 ></div>
                 <div className="book-shelf-changer">
                     <select value={selectedShelf} onChange={handleShelfChanged}>
-                        <option value="default" disabled>{ selectedShelf ? "Move to..." : "Add to..." }</option>
+                        <option value="default" disabled>{ (selectedShelf && selectedShelf !== "default") ? "Move to..." : "Add to..." }</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>
-                        { selectedShelf && <option value="none">None</option> }
+                        { (selectedShelf && selectedShelf !== "default") && <option value="none">None</option> }
                     </select>
                 </div>
             </div>

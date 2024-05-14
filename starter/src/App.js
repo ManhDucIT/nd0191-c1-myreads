@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import * as BooksAPI from "./utils/BooksAPI";
 import MainScreen from "./screens/MainScreen";
 import SearchScreen from "./screens/SearchScreen";
@@ -20,7 +20,7 @@ function App() {
   const handleShelfChanged = async (bookId, newShelf) => {
     let isBookExisting = false;
 
-    const updatedBooks = books.map(book => {
+    let updatedBooks = books.map(book => {
       if(book.id === bookId){
         book.shelf = newShelf;
         isBookExisting = true;
@@ -31,7 +31,7 @@ function App() {
 
     if(!isBookExisting){
       const res = await BooksAPI.get(bookId);
-      updatedBooks = [...updatedBooks, res];
+      updatedBooks = [...updatedBooks, { ...res, shelf: newShelf }];
     }
     
     setBooks(updatedBooks);

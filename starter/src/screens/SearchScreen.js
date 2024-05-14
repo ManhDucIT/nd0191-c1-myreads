@@ -13,19 +13,21 @@ const SearchScreen = ({ books, onShelfChanged }) => {
             if(query){
                 const res = await BooksAPI.search(query, 100);
                 
-                res.forEach(searchedBook => {
-                    const book = books.find(book => book.id === searchedBook.id);
-                    if(book){
-                        searchedBook.shelf = book.shelf;
-                    }
-                });
-                
-                setSearchedBooks(res);
+                if(res && Array.isArray(res)){
+                    res.forEach(searchedBook => {
+                        const book = books.find(book => book.id === searchedBook.id);
+                        if(book){
+                            searchedBook.shelf = book.shelf;
+                        }
+                    });
+                    
+                    setSearchedBooks(res);
+                }
             }
         }, 200)
     
         return () => clearTimeout(search)
-    }, [query])
+    }, [query, books])
 
     const updateQuery = (e) => {
         setQuery(e.target.value.trim());
