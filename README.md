@@ -1,6 +1,19 @@
 # MyReads Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+This is a fork of https://github.com/udacity/nd0191-c1-myreads/.
+
+## Instructions for installing and launching the project:
+1. Clone project: git clone https://github.com/ManhDucIT/nd0191-c1-myreads.git.
+2. Open root folder (nd0191-c1-myreads) in VSCode
+3. Inside VSCode Terminal, go to starter folder: cd starter
+4. Install dependencies: npm i
+5. Start project: npm start
+6. [OPTIONAL] : If facing the Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './lib/tokenize' is not defined,
+just delete package-lock.json file & node_modules folder, the back to step 4
+7. [OPTIONAL] : If facing the Error: error:0308010C:digital envelope routines::unsupported, type the following command:
+export NODE_OPTIONS=--openssl-legacy-provider, then back to step 5
+
+This is a the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) to bootstrap the project.
 
