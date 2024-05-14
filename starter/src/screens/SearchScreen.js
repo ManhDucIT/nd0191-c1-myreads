@@ -36,7 +36,7 @@ const SearchScreen = ({ books, onShelfChanged }) => {
     }, [query, books])
 
     const updateQuery = (e) => {
-        setQuery(e.target.value.trim());
+        setQuery(e.target.value);
     };
 
     return (
