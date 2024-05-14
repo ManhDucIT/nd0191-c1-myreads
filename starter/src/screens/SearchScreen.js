@@ -11,7 +11,7 @@ const SearchScreen = ({ books, onShelfChanged }) => {
     useEffect(() => {
         const search = setTimeout(async () => {
             if(query){
-                const res = await BooksAPI.search(query, 100);
+                const res = await BooksAPI.search(query, 20);
                 
                 if(res && Array.isArray(res)){
                     res.forEach(searchedBook => {
@@ -21,8 +21,14 @@ const SearchScreen = ({ books, onShelfChanged }) => {
                         }
                     });
                     
-                    setSearchedBooks(res);
+                    setSearchedBooks(res.filter(book => book.imageLinks && book.imageLinks.thumbnail));
                 }
+                else{
+                    setSearchedBooks([]);
+                }
+            }
+            else{
+                setSearchedBooks([]);
             }
         }, 200)
     
